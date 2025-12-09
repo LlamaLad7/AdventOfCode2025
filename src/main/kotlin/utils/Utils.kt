@@ -28,3 +28,6 @@ private val intRegex = "[+-]?\\d+".toRegex()
 
 fun String.ints() = intRegex.findAll(this).map { it.value.toInt() }.toList()
 fun String.longs() = intRegex.findAll(this).map { it.value.toLong() }.toList()
+
+fun <T> List<T>.allPairs(): Sequence<Pair<T, T>> =
+    asSequence().flatMapIndexed { i, a -> subList(i + 1, size).asSequence().map { a to it } }
