@@ -30,6 +30,7 @@ abstract class Z3Scope(private val context: Context) {
     val Expr<BitVecSort>.solution: BigInteger get() = (model.eval(this, true) as BitVecNum).bigInteger
 
     infix fun <T : Sort> Expr<T>.eq(other: Expr<T>): BoolExpr = context.mkEq(this, other)
+    infix fun <T : ArithSort> Expr<T>.ge(other: Expr<T>): BoolExpr = context.mkGe(this, other)
     operator fun <T : ArithSort> Expr<T>.plus(other: Expr<T>): ArithExpr<T> = context.mkAdd(this, other)
     operator fun <T : ArithSort> Expr<T>.times(other: Expr<T>): ArithExpr<T> = context.mkMul(this, other)
 
